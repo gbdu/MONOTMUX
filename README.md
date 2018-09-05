@@ -1,9 +1,27 @@
-#+OPTIONS: ^:nil 
-#+OPTIONS: _:nil
 
-* Screenshots
-[[/tmux.png]]
-* What is this? 
+# Table of Contents
+
+1.  [Screenshots](#orgfa3b455)
+2.  [What is this?](#org1c7889d)
+    1.  [tmux\_term\_or\_pane.sh](#org82be541)
+    2.  [tmux\_update\_focus.sh](#org9031f6a)
+3.  [Why do things this way?](#org5c524d7)
+4.  [Installation](#orgb018ca8)
+5.  [Dependencies](#orgcb20811)
+
+
+
+<a id="orgfa3b455"></a>
+
+# Screenshots
+
+![img](/tmux.png)
+
+
+<a id="org1c7889d"></a>
+
+# What is this?
+
 This is not your typical tmux configuration, it contains two simple
 scripts which will make your life a lot easier if you like to keep one
 term with tmux open. If you have a problem with starting too many
@@ -11,7 +29,11 @@ terms, this is for you.
 
 Here's what the scripts do: 
 
-** tmux_term_or_pane.sh
+
+<a id="org82be541"></a>
+
+## tmux\_term\_or\_pane.sh
+
 Basically, this script will give you a term. You want to bind it to
 Super-Return or however you usually launch your terminal. 
 
@@ -20,8 +42,8 @@ focus to it and split a new pane (unless we're at MAXNUM panes). This
 limits you to a single term window which you can minimize or close and
 always get back with your Super-Return keybind. 
 
-If a term does not exist, then **start a new session called "manage"
-and create tmux windows corresponding to our virtual desktops**. This
+If a term does not exist, then ****start a new session called "manage"
+and create tmux windows corresponding to our virtual desktops****. This
 is the important thing.
 
 For example, in my screenshots, I have 4 Openbox desktops called zsh,
@@ -32,9 +54,13 @@ If a tmux session exists but a term does not, just create a term and
 attach it to the 'manage' session.
 
 The default term client is xfce4-terminal, but you can change it by
-changing the TERM_CLIENT variable 
+changing the TERM\_CLIENT variable 
 
-** tmux_update_focus.sh
+
+<a id="org9031f6a"></a>
+
+## tmux\_update\_focus.sh
+
 Get the virtual desktop names from the window manager then update our
 tmux session to select the corresponding tmux window with the same
 name.
@@ -43,17 +69,18 @@ You want to call this script every time you change virtual desktops,
 so tmux will update its focussed window. For example, in my
 openbox rc.xml, I have the following: 
 
-#+BEGIN_SRC nxml :exports code
     <keybind key="C-W-Left">
       <action name="DesktopLeft"/>
       <action name="Execute">
         <command>tmux_update_focus.sh</command>
       </action>
     </keybind>
-#+END_SRC
 
 
-* Why do things this way? 
+<a id="org5c524d7"></a>
+
+# Why do things this way?
+
 Organization and minimalism. In the past, I used to simply bind
 Super-Return to xfce4-terminal or urxvt, over time, I realized having
 10 terms on each desktop is the wrong strategy.
@@ -74,17 +101,26 @@ on the corresponding desktop with Super-Return.
 If your term window is on another desktop or hidden behind a bunch of
 other windows, Super-Return will give it focus. 
 
-* Installation
-1) Put tmux_term_or_pane.sh and tmux_update_focus.sh somewhere in your
-   $PATH, chmod +x them. 
-2) Edit tmux_term_or_pane.sh to match your prefered terminal client,
-   the default is xfce4-terminal. 
-3) Bind tmux_term_or_pane.sh to your prefered "launch terminal"
-   keybind in your window manager. 
-4) Put tmux_update_focus.sh in your window manager's  "change desktop"
-   hook, or bind it to the same keys you use to switch virtual
-   desktops, ie. ALT-CTRL-Left or ALT-CTRL-Right. 
 
-* Dependencies
-- wmctrl
-- xdotool
+<a id="orgb018ca8"></a>
+
+# Installation
+
+1.  Put tmux\_term\_or\_pane.sh and tmux\_update\_focus.sh somewhere in your
+    $PATH, chmod +x them.
+2.  Edit tmux\_term\_or\_pane.sh to match your prefered terminal client,
+    the default is xfce4-terminal.
+3.  Bind tmux\_term\_or\_pane.sh to your prefered "launch terminal"
+    keybind in your window manager.
+4.  Put tmux\_update\_focus.sh in your window manager's  "change desktop"
+    hook, or bind it to the same keys you use to switch virtual
+    desktops, ie. ALT-CTRL-Left or ALT-CTRL-Right.
+
+
+<a id="orgcb20811"></a>
+
+# Dependencies
+
+-   wmctrl
+-   xdotool
+
